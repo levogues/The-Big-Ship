@@ -1,0 +1,76 @@
+// Inputs to Direction control 
+// w - forward, s - backwards, a - left, d - right
+// movement command - direction_to_move [a, s, w, d]
+// Check_Forward --> function that returns the number of small squares forward that it is okay for the rover to move
+                    e.g. if there is a wall directly in front Check_Forward() = 0, if there is 8 inches clear space = 2. 
+// 
+
+
+
+// Takes in an input direction the rover wishes to go 
+// Moves forward if the direction it is facing and the direction it wants to go are the same and the way forward is clear for a 
+// given distance
+// Otherwise calls a turning function that rotates the bot where it stands
+    
+Move(direction_moving, direction_to_move) {
+
+  If direction_facing = direction_to_move
+    drive_amount = Check_Forward();
+    Drive(drive_amount);
+    
+  Else
+    turning_direction = direction_to_move;
+    Turn(turning_direction);
+}
+
+
+// Drive the rover forwards a given amount, the amount given being in miniature squares
+// Motors used to turn will be the two parallel to DOT, defined as Left_Motor and Right_Motor
+// Constantly check the forward and side ultrasonic sensors to see if something is going wrong
+
+Drive(drive_amount) {
+  
+  motor_speed = YYY; // Some set speed we want the rover to always move forward at
+  distance = drive_amount * 3 inches;
+  number_of_turns = distance * some encoder constant value tbd;
+  
+  Left_Motor(motor_speed, number_of_turns);
+  Right_Motor(motor_speed, number_of_turns);
+
+}
+
+
+// Turns the rover without moving it in a given direction
+// Motors used to turn will be the two perpendicular to DOT, defined as Front_Motor and Back_Motor
+// turning_speed assumed to be known and the rate at which the motors must spin to move in a given direction
+
+Turn(turning_direction) {
+  
+  If turning_direction = 'a'  // turn to the left
+    motor_speed = XXX;      
+    number_of_turns = XXX; // measure on the encoder to be determined so that we turn the amount we need to, could change to duration
+  
+  If turning_direction = 's'  // turn all the way around
+    motor_speed = 2XXX;      
+    number_of_turns = 2XXX;
+  
+  If turning_direction = 'd'  //turn to the right
+    motor_speed = -XXX;      
+    number_of_turns = -XXX;
+  
+  Front_Motor(motor_speed, number_of_turns)
+  Back_Motor(motor_speed, number_of_turns)
+
+}
+
+
+//Function to check after a turn if the new DOT is straight if possible, then readjust rotation if it is not
+
+Check_DOT_Straight () {
+
+}
+
+
+Direction_Moving()
+
+
